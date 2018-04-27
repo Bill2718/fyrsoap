@@ -29,9 +29,22 @@ public class CxfConfig {
         return new MaterialService();
     }
     @Bean
+    public DeliveryService deliveryService() {
+    	return new DeliveryService();
+    }
+    
+    @Bean
     public Endpoint endpoint() {
         EndpointImpl endpoint = new EndpointImpl(springBus(), materialService());
         endpoint.publish("/material");
         return endpoint;
     }
+    
+    @Bean
+    public Endpoint deliveryEndponit() {
+    	EndpointImpl endpoint = new EndpointImpl(springBus(),deliveryService());
+        endpoint.publish("/delivery");
+        return endpoint;
+    }
+    
 }
